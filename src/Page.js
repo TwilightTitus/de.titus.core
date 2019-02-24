@@ -69,7 +69,7 @@ let Page = class {
 		let browser = this.detectBrowser();
 		if (browser.ie && browser.ie < 11) {
 			let tempUrl = aUrl.toLowerCase().trim();
-			if (this.hasBaseTag && !tempUrl.indexOf("http:") == 0
+			if (typeof this.baseTagValue !== "undefined" && !tempUrl.indexOf("http:") == 0
 					&& !tempUrl.indexOf("https:") == 0
 					&& !tempUrl.indexOf("ftp:") == 0
 					&& !tempUrl.indexOf("ftps:") == 0
