@@ -1,5 +1,5 @@
 // Load all polyfills
-import "./polyfill/String";
+import "./polyfill";
 
 // Load top level modules
 import Namespace from "./Namespace";

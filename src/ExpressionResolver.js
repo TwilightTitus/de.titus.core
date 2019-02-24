@@ -11,8 +11,7 @@ let ExpressionResolver = class {
 		let matcher = this.regex.parse(text);
 		while (matcher.next()) {
 			let expression = matcher.getMatch();
-			let expressionResult = this.internalResolveExpression(matcher
-					.getGroup(1), aDataContext, aDefaultValue);
+			let expressionResult = this.internalResolveExpression(matcher.getGroup(1), aDataContext, aDefaultValue);
 			if (expressionResult != undefined)
 				text = matcher.replaceAll(expressionResult, text);
 		}
@@ -23,18 +22,15 @@ let ExpressionResolver = class {
 			aDataContext, aDefaultValue) {
 		let matcher = this.regex.parse(aExpression);
 		if (matcher.next())
-			return this.internalResolveExpression(matcher.getGroup(1),
-					aDataContext, aDefaultValue);
+			return this.internalResolveExpression(matcher.getGroup(1), aDataContext, aDefaultValue);
 	
-		return this.internalResolveExpression(aExpression, aDataContext,
-				aDefaultValue);
+		return this.internalResolveExpression(aExpression, aDataContext, aDefaultValue);
 	};
 	
 	internalResolveExpression(aExpression,
 			aDataContext, aDefaultValue) {
 		try {
-			return de.titus.core.SpecialFunctions.doEvalWithContext(aExpression,
-					aDataContext, aDefaultValue);
+			return de.titus.core.SpecialFunctions.doEvalWithContext(aExpression, aDataContext, aDefaultValue);
 		} catch (e) {
 			return aDefaultValue;
 		}

@@ -1,3 +1,5 @@
+import {extend} from "./utils/ObjectUtils";
+
 let DEFAULTS = {
 	formatToHtml : {
 		"tabsize" : 4,
@@ -15,8 +17,7 @@ let StringUtils = {
 		if (aText == undefined || typeof aText !== "string" || aText == "")
 			return aText;
 
-		let settings = $.extend({}, theSettings,
-				DEFAULTStrimTextLength);
+		let settings = extend({}, theSettings, DEFAULTS.trimTextLength);
 
 		if (aText.length > maxLength) {
 			let end = maxLength - settings.postfix.length;
@@ -28,15 +29,13 @@ let StringUtils = {
 	formatToHtml : function(aText, theSettings) {
 		if (aText == undefined || typeof aText !== "string" || aText == "")
 			return aText;
-		let settings = $.extend({}, theSettings ,DEFAULTSformatToHtml);
+		let settings = extend({}, theSettings ,DEFAULTS.formatToHtml);
 		let lines = aText.replace(/\n\r/g, "\n").replace(/\r/g, "\n").split("\n");
 		let text = "";
 		for (let i = 0; i < lines.length; i++) {
 			if (i != 0)
 				text = text + settings.newlineTag;
-			text = text
-					+ StringUtils.preventTabs(lines[i], settings.tabsize,
-							settings.tabchar);
+			text = text	+ StringUtils.preventTabs(lines[i], settings.tabsize, settings.tabchar);
 		}
 		return text;
 	},

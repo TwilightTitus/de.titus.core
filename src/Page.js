@@ -1,5 +1,3 @@
-const CSSTEMPLATE = '<link rel="stylesheet" type="text/css"/>';
-const JSTEMPLATE = '<script type="text/javascript"></script>';
 let Page = class {
 	constructor() {
 		this.baseTagValue = undefined;
@@ -16,10 +14,10 @@ let Page = class {
 		
 		if (typeof this.files[aUrl] === "undefined") {
 			this.files[aUrl] = true;
-			// @TODO remove jquery
-			let jsScript = $(JSTEMPLATE).clone();
-			jsScript.attr("src", aUrl);
-			$("head").append(jsScript);
+			let element = document.createElement("script");
+			element.setAttribute("type", "text/javascript");
+			element.setAttribute("src", aUrl);
+			document.body.append(element);
 	
 			if (aFunction != undefined)
 				aFunction();
@@ -47,9 +45,11 @@ let Page = class {
 	
 		if (this.files[aUrl] == undefined) {
 			this.files[aUrl] = true;
-			let cssScript = $(CSSTEMPLATE).clone();
-			cssScript.attr("href", aUrl);
-			$("head").append(cssScript);
+			let element = document.createElement("link");
+			element.setAttribute("rel", "stylesheet");
+			element.setAttribute("type", "text/css");
+			element.setAttribute("href", aUrl);
+			document.head.append(element);
 		}
 	};
 	
