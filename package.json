@@ -27,7 +27,7 @@
   },
   "homepage": "https://github.com/TwilightTitus/de.titus.form#readme",
   "dependencies": {
-    "dom-api-extension": "^1.0.0"
+    "dom-api-extension": "^1.0.1"
   },
   "directories": {
     "test": "test"
