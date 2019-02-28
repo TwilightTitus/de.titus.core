@@ -11,6 +11,7 @@ import PagingUtils from "./PagingUtils";
 import StringUtils from "./StringUtils";
 import URL from "./URL";
 import Page from "./Page";
+import EventBind from "./EventBind";
 
 // load regex modules
 import Regex from "./regex/Regex";
@@ -29,6 +30,7 @@ Namespace("de.titus.core", function() {
 		StringUtils : StringUtils,
 		URL: URL,
 		Page: Page,
+		EventBind: EventBind,
 		regex : {
 			Regex : Regex,
 			Matcher : Matcher

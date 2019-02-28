@@ -2,7 +2,7 @@
   "name": "de.titus.core",
   "version": "2.0.0",
   "description": "a lib with useful functions like better regex, handle url at browser, expression resolver with defined datacontext and so on",
-  "main": "src/index.js",
+  "main": "./index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js && webpack --config webpack.dev.js",
     "dev-server": "webpack-dev-server --open --config webpack.dev-server.js",
