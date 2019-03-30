@@ -1,5 +1,5 @@
 import "../node_modules/dom-api-extension";
-import extend from "./utils/ObjectUtils";
+import ObjectUtils from "./utils/ObjectUtils";
 import ExpressionResolver from "./ExpressionResolver";
 
 const expressionResolver = ExpressionResolver.DEFAULT;
@@ -13,7 +13,6 @@ const FINISHEDSTATE = {
 };
 
 const Executer = function(anEvent) {
-	console.log(arguments);	
 	let element = anEvent.currentTarget;
 	let data = element.data("de.titus.core.eventBind");
 	if (data.preventDefault)
@@ -22,7 +21,7 @@ const Executer = function(anEvent) {
 		anEvent.stopPropagation();
 
 	let args = Array.from(arguments);
-	if (typeof args !== "undefined" && args.length >= 1 && typeof anEvent.data !== "undefined")
+	if (args.length >= 1 && typeof anEvent.data !== "undefined")
 		args.splice(1, 0, anEvent.data);
 	
 	if (typeof data.action !== 'undefined') {
@@ -37,16 +36,21 @@ const Executer = function(anEvent) {
 };
 
 
-let eventBind = function(anElement, aContext) {
-	if(typeof anElement === "undefined" || (anElement instanceof NodeList && anElement.length == 0))
+const EventBind = function(anElement, aContext) {
+	if(typeof anElement === "undefined")
 		return;
+	
+	if(anElement instanceof NodeList)
+		return anElement.forEach((function(aContext, anElement){
+			EventBind(anElement, aContext);
+		}).bind(null, aContext));
 	
 	let result = {
 	    preventDefault : (typeof anElement.attr("event-prevent-default") !== "undefined"),
 	    stopPropagation : (typeof anElement.attr("event-stop-propagation") !== "undefined")
 	};
 	result.eventType = anElement.attr("event-type");
-	if (typeof result.eventType === 'undefined'){
+	if (result.eventType){
 		anElement.data(STATE.FINISHED, FINISHEDSTATE.FAIL);
 		return;
 	}
@@ -54,18 +58,18 @@ let eventBind = function(anElement, aContext) {
 	result.action = anElement.attr("event-action");
 	result.delegation = anElement.attr("event-delegation");
 
-	if (typeof (result.action || result.delegation) === 'undefined') {
+	if (!(result.action || result.delegation)) {
 		anElement.data(STATE.FINISHED, FINISHEDSTATE.FAIL);
 		return;
 	}
 
 	result.eventData = anElement.attr("event-data");
-	if (typeof result.eventData !== 'undefined' && result.eventData.length > 0)
+	if (!result.eventData && result.eventData.length > 0)
 		result.eventData = expressionResolver.resolveExpression(eventData, aContext, {});
 	else if (typeof aContext !== 'undefined')
-		result.eventData = extend({}, aContext);
-
-	if (typeof result.eventData !== 'undefined')
+		result.eventData = ObjectUtils.extend({}, aContext);
+	
+	if (result.eventData)
 		anElement.on(result.eventType, null, result.eventData, Executer);
 	else
 		anElement.on(result.eventType, Executer);
@@ -74,20 +78,20 @@ let eventBind = function(anElement, aContext) {
 	return result;
 };
 
-let observer = new MutationObserver(function(mutations) {
+const Observer = new MutationObserver(function(mutations) {
 	mutations.forEach(function(mutation) {
 		mutation.addedNodes.forEach(function(node) {
-			if (node.nodetype != Node.TEXT_NODE) {
+			if (node.nodeType != Node.TEXT_NODE) {
 				if(node.is("[event-type]"))
-					eventBind(node);				
-				eventBind(node.find("[event-type]"));
+					EventBind(node);				
+				EventBind(node.find("[event-type]"));
 			}
 		});
 	});
 });
 
 // pass in the target node, as well as the observer options
-observer.observe(find("[event-autorun]"),  {
+Observer.observe(find("body").first(),  {
     attributes : true,
     childList : true,
     subtree : true,
@@ -95,6 +99,7 @@ observer.observe(find("[event-autorun]"),  {
 });
 
 ready(function() {
-	eventBind(find("[event-autorun]"));
+	console.log("init event binds with autorun");
+	EventBind(find("[event-autorun]"));
 });
-export default eventBind;
+export default EventBind;

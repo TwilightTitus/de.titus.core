@@ -1,4 +1,4 @@
-import {extend} from "./utils/ObjectUtils";
+import ObjectUtils from "./utils/ObjectUtils";
 
 let DEFAULTS = {
 	formatToHtml : {
@@ -17,7 +17,7 @@ let StringUtils = {
 		if (aText == undefined || typeof aText !== "string" || aText == "")
 			return aText;
 
-		let settings = extend({}, theSettings, DEFAULTS.trimTextLength);
+		let settings = ObjectUtils.extend({}, theSettings, DEFAULTS.trimTextLength);
 
 		if (aText.length > maxLength) {
 			let end = maxLength - settings.postfix.length;
@@ -29,7 +29,7 @@ let StringUtils = {
 	formatToHtml : function(aText, theSettings) {
 		if (aText == undefined || typeof aText !== "string" || aText == "")
 			return aText;
-		let settings = extend({}, theSettings ,DEFAULTS.formatToHtml);
+		let settings = ObjectUtils.extend({}, theSettings ,DEFAULTS.formatToHtml);
 		let lines = aText.replace(/\n\r/g, "\n").replace(/\r/g, "\n").split("\n");
 		let text = "";
 		for (let i = 0; i < lines.length; i++) {

@@ -29,7 +29,10 @@ let extend = function(){
 	return target;
 };
 
+const ObjectUtils = {
+		extend : extend
+};
 
-export { extend };
+export default ObjectUtils;
 
 

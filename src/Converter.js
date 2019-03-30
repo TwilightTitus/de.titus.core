@@ -1,4 +1,4 @@
-let Converter = {
+const Converter = {
 	xmlToJson : function(aNode) {
 		// Create the return object
 		let obj = {};
