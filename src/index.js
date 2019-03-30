@@ -12,6 +12,7 @@ import StringUtils from "./StringUtils";
 import URL from "./URL";
 import Page from "./Page";
 import EventBind from "./EventBind";
+import JQuery from "./jquery/index";
 
 // load regex modules
 import Regex from "./regex/Regex";
@@ -34,6 +35,7 @@ Namespace("de.titus.core", function() {
 		regex : {
 			Regex : Regex,
 			Matcher : Matcher
-		}			
+		},
+		jquery : JQuery
 	};
 });
