@@ -5,7 +5,8 @@ import ExpressionResolver from "./ExpressionResolver";
 const expressionResolver = ExpressionResolver.DEFAULT;
 
 const STATE = {
-	FINISHED : "$$eventBind.FINISHED$$"
+	FINISHED : "$$eventBind.FINISHED$$",
+	FAIL_DETAILS : "$$eventBind.FAIL_DETAILS$$"
 };
 const FINISHEDSTATE = {
     FAIL : "fail",
@@ -24,15 +25,15 @@ const Executer = function(anEvent) {
 	if (args.length >= 1 && typeof anEvent.data !== "undefined")
 		args.splice(1, 0, anEvent.data);
 	
-	if (typeof data.action !== 'undefined') {
+	if (typeof data.action === 'string') {
 		let action = expressionResolver.resolveExpression(data.action, anEvent.data, undefined);
 		if (typeof action === "function")			
 			action.apply(action, args);
 	}
-	else if (typeof data.delegation !== 'undefined')
+	else if (typeof data.delegation === 'string')
 		element.trigger(data.delegation, args);
 
-	return !anEvent.isDefaultPrevented();
+	return data.preventDefault;
 };
 
 
@@ -40,42 +41,48 @@ const EventBind = function(anElement, aContext) {
 	if(typeof anElement === "undefined")
 		return;
 	
+	if(typeof anElement.data("de.titus.core.eventBind") !== "undefined")
+		return;
+	
 	if(anElement instanceof NodeList)
 		return anElement.forEach((function(aContext, anElement){
 			EventBind(anElement, aContext);
 		}).bind(null, aContext));
 	
-	let result = {
-	    preventDefault : (typeof anElement.attr("event-prevent-default") !== "undefined"),
-	    stopPropagation : (typeof anElement.attr("event-stop-propagation") !== "undefined")
+	let data = {
+	    preventDefault : anElement.attr("event-prevent-default") != null,
+	    stopPropagation : anElement.attr("event-stop-propagation") != null
 	};
-	result.eventType = anElement.attr("event-type");
-	if (result.eventType){
-		anElement.data(STATE.FINISHED, FINISHEDSTATE.FAIL);
+	anElement.data("de.titus.core.eventBind", data);
+	
+	data.eventType = anElement.attr("event-type");
+	if (typeof data.eventType !== "string"){
+		data.state = FINISHEDSTATE.FAIL;
+		data.state.details = "No event type defined!";
 		return;
 	}
 	
-	result.action = anElement.attr("event-action");
-	result.delegation = anElement.attr("event-delegation");
+	data.action = anElement.attr("event-action");
+	data.delegation = anElement.attr("event-delegation");
 
-	if (!(result.action || result.delegation)) {
-		anElement.data(STATE.FINISHED, FINISHEDSTATE.FAIL);
+	if (typeof data.action !== "string" && typeof data.delegation !== "string") {
+		data.state = FINISHEDSTATE.FAIL;
+		data.state.details = "No action or delegation defined!";
 		return;
 	}
 
-	result.eventData = anElement.attr("event-data");
-	if (!result.eventData && result.eventData.length > 0)
-		result.eventData = expressionResolver.resolveExpression(eventData, aContext, {});
+	data.eventData = anElement.attr("event-data");
+	if (typeof data.eventData === "string" && data.eventData.length > 0)
+		data.eventData = expressionResolver.resolveExpression(eventData, aContext, {});
 	else if (typeof aContext !== 'undefined')
-		result.eventData = ObjectUtils.extend({}, aContext);
+		data.eventData = ObjectUtils.extend({}, aContext);
 	
-	if (result.eventData)
-		anElement.on(result.eventType, null, result.eventData, Executer);
+	if (data.eventData)
+		anElement.on(data.eventType, null, data.eventData, Executer);
 	else
-		anElement.on(result.eventType, Executer);
+		anElement.on(data.eventType, Executer);
 	
-	anElement.data(STATE.FINISHED, FINISHEDSTATE.READY);
-	return result;
+	return this;
 };
 
 const Observer = new MutationObserver(function(mutations) {

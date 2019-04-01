@@ -1,6 +1,6 @@
 let Matcher = function (aRegExp, aText) {
 	
-	this.internalRegex = typeof aRegExp; 
+	this.internalRegex = aRegExp; 
 	this.processingText = aText;
 	this.currentMatch = undefined;
 };
