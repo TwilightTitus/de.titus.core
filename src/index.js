@@ -15,14 +15,14 @@ import EventBind from "./EventBind";
 import JQuery from "./jquery/index";
 
 // load regex modules
-import Regex from "./regex/Regex";
-import Matcher from "./regex/Matcher";
+import Regex from "./regex";
 
 
 
 // create namespace
 Namespace("de.titus.core", function() {
 	return {
+		VERSION : "${version}",
 		Namespace : Namespace,
 		UUID : UUID,
 		SpecialFunctions : SpecialFunctions,
@@ -32,10 +32,7 @@ Namespace("de.titus.core", function() {
 		URL: URL,
 		Page: Page,
 		EventBind: EventBind,
-		regex : {
-			Regex : Regex,
-			Matcher : Matcher
-		},
+		regex : Regex,
 		jquery : JQuery
 	};
 });
