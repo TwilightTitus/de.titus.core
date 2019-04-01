@@ -1,10 +1,11 @@
 import Component from "./Component";
+import EventBind from "./EventBind";
 
-const JQuery = {
+const Package = {
 	Component : Component,
 	Components : {
 		asComponent : Component
 	}
 };
 
-export default JQuery;
+export default Package;
