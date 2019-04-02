@@ -11,7 +11,7 @@ Matcher.prototype.isMatching = function() {
 
 Matcher.prototype.next = function() {
 	this.currentMatch = this.internalRegex.exec(this.processingText);
-	if (typeof this.currentMatch !== "undefined") {
+	if (this.currentMatch instanceof Array) {
 		this.processingText = this.processingText.replace(this.currentMatch[0],	"");
 		return true;
 	}
@@ -19,19 +19,19 @@ Matcher.prototype.next = function() {
 };
 
 Matcher.prototype.getMatch = function() {
-	if (typeof this.currentMatch !== "undefined")
+	if (this.currentMatch instanceof Array)
 		return this.currentMatch[0];
 	return undefined;
 };
 
 Matcher.prototype.getGroup = function(aGroupId) {
-	if (typeof this.currentMatch !== "undefined")
+	if (this.currentMatch instanceof Array)
 		return this.currentMatch[aGroupId];
 	return undefined;
 };
 
 Matcher.prototype.replaceAll = function(aReplaceValue, aText) {
-	if (typeof this.currentMatch !== "undefined")
+	if (this.currentMatch instanceof Array)
 		return aText.replace(this.currentMatch[0], aReplaceValue);
 	return aText;
 };

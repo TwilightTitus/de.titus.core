@@ -58,7 +58,7 @@ const EventBind = function(anElement, aContext) {
 	data.eventType = anElement.attr("event-type");
 	if (typeof data.eventType !== "string"){
 		data.state = FINISHEDSTATE.FAIL;
-		data.state.details = "No event type defined!";
+		data.details = "No event type defined!";
 		return;
 	}
 	
@@ -67,7 +67,7 @@ const EventBind = function(anElement, aContext) {
 
 	if (typeof data.action !== "string" && typeof data.delegation !== "string") {
 		data.state = FINISHEDSTATE.FAIL;
-		data.state.details = "No action or delegation defined!";
+		data.details = "No action or delegation defined!";
 		return;
 	}
 

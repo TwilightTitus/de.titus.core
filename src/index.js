@@ -12,6 +12,7 @@ import StringUtils from "./StringUtils";
 import URL from "./URL";
 import Page from "./Page";
 import EventBind from "./EventBind";
+import ScreenObserver from "./ScreenObserver";
 import JQuery from "./jquery/index";
 
 // load regex modules
@@ -32,6 +33,7 @@ Namespace("de.titus.core", function() {
 		URL: URL,
 		Page: Page,
 		EventBind: EventBind,
+		ScreenObserver : ScreenObserver,
 		regex : Regex,
 		jquery : JQuery
 	};
