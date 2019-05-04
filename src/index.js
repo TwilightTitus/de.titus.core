@@ -1,10 +1,6 @@
-// Load all polyfills
-import "./polyfill";
-
-// Load top level modules
+//modules
 import Namespace from "./Namespace";
 import UUID from "./UUID";
-import SpecialFunctions from "./SpecialFunctions";
 import ExpressionResolver from "./ExpressionResolver";
 import Converter from "./Converter";
 import PagingUtils from "./PagingUtils";
@@ -13,17 +9,25 @@ import URL from "./URL";
 import Page from "./Page";
 import EventBind from "./EventBind";
 import ScreenObserver from "./ScreenObserver";
-import JQuery from "./jquery/index";
-
-// load regex modules
-import Regex from "./regex";
 
 
+// load packages
+import regex from "./regex";
+import utils from "./utils";
+import jquery from "./jquery";
 
-// create namespace
+
+
+// externalize libs for browser
 Namespace("de.titus.core", function() {
 	return {
 		VERSION : "${version}",
+		//packages
+		utils : utils,
+		regex : regex,
+		jquery : jquery,
+		
+		//modules
 		Namespace : Namespace,
 		UUID : UUID,
 		SpecialFunctions : SpecialFunctions,
@@ -33,8 +37,6 @@ Namespace("de.titus.core", function() {
 		URL: URL,
 		Page: Page,
 		EventBind: EventBind,
-		ScreenObserver : ScreenObserver,
-		regex : Regex,
-		jquery : JQuery
+		ScreenObserver : ScreenObserver
 	};
 });

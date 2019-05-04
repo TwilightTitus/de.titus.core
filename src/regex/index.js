@@ -1,9 +1,9 @@
 import Regex from "./Regex";
 import Matcher from "./Matcher";
 
-const pack = {
+const regex = {
 	Regex : Regex,
 	Matcher : Matcher
 };
 
-export default pack;
+export default regex;

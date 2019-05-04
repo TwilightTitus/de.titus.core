@@ -1,5 +1,3 @@
-import "../polyfill";
-
 let extend = function(){
 	if(arguments.length == 0)
 		return;	
