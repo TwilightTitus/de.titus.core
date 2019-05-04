@@ -6,12 +6,13 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js && webpack --config webpack.dev.js",
     "dev-server": "webpack-dev-server --open --config webpack.dev-server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jasmine"
   },
   "keywords": [],
   "author": "Frank Schüler",
   "license": "MIT",
   "devDependencies": {
+    "jasmine": "^3.4.0",
     "replace-in-file-webpack-plugin": "^1.0.6",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.1",
