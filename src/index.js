@@ -3,8 +3,6 @@ import Namespace from "./Namespace";
 import UUID from "./UUID";
 import ExpressionResolver from "./ExpressionResolver";
 import Converter from "./Converter";
-import PagingUtils from "./PagingUtils";
-import StringUtils from "./StringUtils";
 import URL from "./URL";
 import Page from "./Page";
 import EventBind from "./EventBind";
@@ -33,7 +31,6 @@ Namespace("de.titus.core", function() {
 		SpecialFunctions : SpecialFunctions,
 		ExpressionResolver : ExpressionResolver,
 		Converter : Converter,
-		StringUtils : StringUtils,
 		URL: URL,
 		Page: Page,
 		EventBind: EventBind,

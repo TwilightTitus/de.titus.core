@@ -1,6 +1,6 @@
 import ObjectUtils from "./utils/ObjectUtils";
 
-let DEFAULTS = {
+const DEFAULTS = {
 	formatToHtml : {
 		"tabsize" : 4,
 		"tabchar" : "&nbsp;",
@@ -11,7 +11,7 @@ let DEFAULTS = {
 		"postfix" : "..."
 	}
 };
-let StringUtils = {
+const StringUtils = {
 	DEFAULTS : DEFAULTS,
 	trimTextLength : function(aText, maxLength, theSettings) {
 		if (aText == undefined || typeof aText !== "string" || aText == "")

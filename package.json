@@ -17,8 +17,8 @@
     "karma": "^4.1.0",
     "karma-chrome-launcher": "^2.2.0",
     "karma-firefox-launcher": "^1.1.0",
-    "karma-ie-launcher": "^1.0.0",
     "karma-jasmine": "^2.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
     "karma-safari-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^3.0.5",
@@ -40,6 +40,7 @@
     "dom-api-extension": "^1.0.2-beta1"
   },
   "directories": {
+  	"src" : "src",
     "test": "test"
   }
 }

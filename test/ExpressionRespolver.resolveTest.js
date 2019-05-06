@@ -26,7 +26,30 @@ describe("ExpressionResolver.resolve", function() {
 		let context = { a : 1, b : 2 };
 		let expression = "${a + b}";
 		let resolver = ExpressionResolver.DEFAULT;
-		expect(resolver.resolve("${1 + 1}", context)).toBe(2);
-		expect(typeof resolver.resolve(expression, context)).toBe("number");
+		let result = resolver.resolve(expression, context);
+		expect(result).toBe(3);
+		expect(typeof result).toBe("number");
+	});
+	
+	it("resolve ${testFunction(text)} with context", function(){
+		let context = { 
+				testFunction : function(aText){
+					return aText;
+				},
+				text : "hello world"
+			};
+		let expression = "${testFunction(text)}";
+		let resolver = ExpressionResolver.DEFAULT;
+		let result = resolver.resolve(expression, context);
+		expect(result).toBe(context.text);
+		expect(typeof result).toBe("string");
+	});
+	
+	it("resolve ${undefined} default true", function(){
+		let expression = "${undefined}";
+		let resolver = ExpressionResolver.DEFAULT;
+		let result = resolver.resolve(expression, {}, true);
+		expect(result).toBe(true);
+		expect(typeof result).toBe("boolean");
 	});
 });

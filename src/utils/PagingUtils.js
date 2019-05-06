@@ -1,4 +1,4 @@
-let PagingUtils = {
+const PagingUtils = {
 	pagerData : function(aPage, aPages, aSize) {
 		let half = Math.round(aPages / 2);
 		let result = {

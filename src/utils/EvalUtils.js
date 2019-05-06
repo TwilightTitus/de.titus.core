@@ -14,7 +14,7 @@ const EvalUtils = {
 			throw e;
 		}	
 	},
-	promiseEval : function(aStatement, aContext, aDefault, timeaTimeoutout){
+	promiseEval : function(aStatement, aContext, aDefault, aTimeout){
 		let action = function(resolve, reject){
 			let result = EvalUtils.eval(aStatement, aContext, aDefault);
 			if(result instanceof Error)
