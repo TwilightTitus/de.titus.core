@@ -5,7 +5,7 @@ const EXPRESSION_REGEX = "\\$\\{([^\\{\\}]+)\\}";
 
 
 const ExpressionResolver = function(varRegex) {
-	this.regex = new Regex(varRegex	|| TEXT_EXPRESSION_REGEX);
+	this.regex = new Regex(varRegex	|| EXPRESSION_REGEX);
 };
 
 ExpressionResolver.prototype.resolve = function(aExpression, aContext, aDefault) {

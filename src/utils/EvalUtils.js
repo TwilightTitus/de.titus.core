@@ -1,5 +1,5 @@
 const EvalUtils = {
-	eval : function(aStatement, aContext, aDefault){	
+	eval : function(aStatement, aContext, aDefault){
 		if (typeof aStatement !== "string")
 			return aStatement;
 		
@@ -7,8 +7,8 @@ const EvalUtils = {
 		if(statement.length === 0)
 			return aDefault;
 		
-		try {		
-			let result = (new Function("c","with(c){return " + aStatement + ";}")).call(aContext || {});
+		try {
+			let result = (new Function("c","with(c){return " + statement + ";}")).call(null, aContext || {});
 			return result || aDefault
 		} catch (e) {
 			throw e;
