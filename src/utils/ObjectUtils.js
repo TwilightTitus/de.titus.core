@@ -1,4 +1,4 @@
-let extend = function(){
+const extend = function(){
 	if(arguments.length == 0)
 		return;	
 	if(arguments.length == 1)
@@ -28,7 +28,7 @@ let extend = function(){
 };
 
 const ObjectUtils = {
-		extend : extend
+	extend : extend
 };
 
 export default ObjectUtils;
