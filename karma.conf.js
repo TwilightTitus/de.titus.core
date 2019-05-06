@@ -1,6 +1,10 @@
 // Karma configuration
 // Generated on Mon May 06 2019 09:06:27 GMT+0200 (GMT+02:00)
 
+const ReplaceInFileWebpackPlugin = require('replace-in-file-webpack-plugin');
+
+
+
 module.exports = function(config) {
   config.set({
 
@@ -28,18 +32,12 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-		// add webpack as preprocessor
-		'test/*Test.js': ['webpack','sourcemap'],
 		'test/**/*Test.js': ['webpack', 'sourcemap']
 	},
 
 	webpack: {
-		// you don't need to specify the entry option because
-		// karma watches the test entry points
-		// webpack watches dependencies
-
-		// ... remainder of webpack configuration (or import)
-		devtool: 'inline-source-map'
+		mode: 'production',
+	    devtool : 'inline-source-map'
 	},
 
 

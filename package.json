@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js && webpack --config webpack.dev.js",
     "dev-server": "webpack-dev-server --open --config webpack.dev-server.js",
-    "test": "jasmine"
+    "test": "karma start"
   },
   "keywords": [],
   "author": "Frank Schüler",
