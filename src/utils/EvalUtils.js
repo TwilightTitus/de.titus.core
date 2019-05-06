@@ -8,7 +8,7 @@ const EvalUtils = {
 			return aDefault;
 		
 		try {
-			let result = (new Function("c","with(c){return " + statement + ";}")).call(null, aContext || {});
+			let result = (new Function("c","try{with(c){return " + statement + ";}}catch(e){throw e;}")).call(null, aContext || {});
 			return result || aDefault
 		} catch (e) {
 			throw e;

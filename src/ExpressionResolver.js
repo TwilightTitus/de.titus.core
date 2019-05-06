@@ -31,18 +31,28 @@ ExpressionResolver.prototype.text = function(aText, aContext, aDefault) {
 	let text = aText;
 	let matcher = this.regex.parse(text);
 	while (matcher.next()) {
-		let expression = matcher.getMatch();
-		let result = EvalUtils.eval(matcher.getGroup(1).trim(), aContext, aDefault);
-		if (typeof result !== "undefined" || hasDefault)
-			text = matcher.replaceAll(result, text);
+		try{
+			let expression = matcher.getMatch();
+			let result = EvalUtils.eval(matcher.getGroup(1).trim(), aContext, aDefault);
+			if (typeof result !== "undefined" || hasDefault)
+				text = matcher.replaceAll(result, text);
+		}catch(e){
+			if(console && console.log)
+				console.error(e);
+			if (hasDefault)
+				text = matcher.replaceAll(aDefault, text);
+		}
 	}
 	return text;
 };
 
 ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault, aTimeout) {
-	let action = (function(resolve){
-		resolve(this.text(aText, aContext, aDefault));
-	}).bind(this);
+	let action = (function(resolve, args){
+		if(args.length === 2)
+			resolve(this.text(args[0], args[1]));
+		else
+			resolve(this.text(args[0], args[1], args[2]));
+	}).bind(this, arguments);
 	
 	if(aTimeout > 0)
 		return new Promise(function(){

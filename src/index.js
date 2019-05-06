@@ -28,7 +28,6 @@ Namespace("de.titus.core", function() {
 		//modules
 		Namespace : Namespace,
 		UUID : UUID,
-		SpecialFunctions : SpecialFunctions,
 		ExpressionResolver : ExpressionResolver,
 		Converter : Converter,
 		URL: URL,

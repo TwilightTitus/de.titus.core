@@ -1,4 +1,4 @@
-let UUID = function() {	
+const UUID = function() {	
 	let spacer = arguments.length == 1 ? arguments[0] : "-";
 	let template = 'xxxxxxxx' + spacer + 'xxxx' + spacer + '4xxx' + spacer + 'yxxx' + spacer + 'xxxxxxxxxxxx';	
 	return template.replace(/[xy]/g, function(c) {
