@@ -13,26 +13,3 @@ import ScreenObserver from "./ScreenObserver";
 import regex from "./regex";
 import utils from "./utils";
 import jquery from "./jquery";
-
-
-
-// externalize libs for browser
-Namespace("de.titus.core", function() {
-	return {
-		VERSION : "${version}",
-		//packages
-		utils : utils,
-		regex : regex,
-		jquery : jquery,
-		
-		//modules
-		Namespace : Namespace,
-		UUID : UUID,
-		ExpressionResolver : ExpressionResolver,
-		Converter : Converter,
-		URL: URL,
-		Page: Page,
-		EventBind: EventBind,
-		ScreenObserver : ScreenObserver
-	};
-});

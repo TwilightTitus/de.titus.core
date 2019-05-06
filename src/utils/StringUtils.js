@@ -1,4 +1,4 @@
-import ObjectUtils from "./utils/ObjectUtils";
+import ObjectUtils from "./ObjectUtils";
 
 const DEFAULTS = {
 	formatToHtml : {
