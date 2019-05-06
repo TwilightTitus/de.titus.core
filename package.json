@@ -4,9 +4,11 @@
   "description": "a lib with useful functions like better regex, handle url at browser, expression resolver with defined datacontext and so on",
   "main": "./index.js",
   "scripts": {
-    "build": "webpack --config webpack.prod.js && webpack --config webpack.dev.js",
-    "dev-server": "webpack-dev-server --open --config webpack.dev-server.js",
-    "test": "karma start"
+    "build": "npm test && webpack --config webpack.prod.js && webpack --config webpack.dev.js",
+    "dev-server": "webpack-dev-server --open --config webpack.dev-server.js && npm run karma:live",
+    "karma:live" : "karma start karma.live-dev.js",
+    "karma:integration" : "karma start karma.integration.js",
+    "test": "npm run karma:integration"
   },
   "keywords": [],
   "author": "Frank Schüler",
@@ -40,7 +42,7 @@
     "dom-api-extension": "^1.0.2-beta1"
   },
   "directories": {
-  	"src" : "src",
+    "src": "src",
     "test": "test"
   }
 }
