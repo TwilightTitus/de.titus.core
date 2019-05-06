@@ -15,24 +15,35 @@ describe("ExpressionResolver.resolve", function() {
 	it("expression to 1 ${1}", function(){
 		let expression = "${1}";
 		let resolver = ExpressionResolver.DEFAULT;
-		expect(resolver.resolve(expression)).toBe(1);
-		expect(typeof resolver.resolve(expression)).toBe("number");
+		resolver.promise(expression).then(function(result){
+			expect(result).toBe(1);
+			return result;
+		}).then(function(result){
+			expect(typeof result).toBe("number");
+		});
 	});	
 	
 	it("expression to 2 ${ 1 + 1}", function(){
 		let expression = "${1 + 1}";
 		let resolver = ExpressionResolver.DEFAULT;
-		expect(resolver.resolve(expression)).toBe(2);
-		expect(typeof resolver.resolve(expression)).toBe("number");
+		resolver.promise(expression).then(function(result){
+			expect(result).toBe(2);
+			return result;
+		}).then(function(result){
+			expect(typeof result).toBe("number");
+		});
 	});
 	
 	it("resolve ${ a + b} with context", function(){
 		let context = { a : 1, b : 2 };
 		let expression = "${a + b}";
 		let resolver = ExpressionResolver.DEFAULT;
-		let result = resolver.resolve(expression, context);
-		expect(result).toBe(3);
-		expect(typeof result).toBe("number");
+		resolver.promise(expression, context).then(function(result){
+			expect(result).toBe(3);
+			return result;
+		}).then(function(result){
+			expect(typeof result).toBe("number");
+		});
 	});
 	
 	it("resolve ${testFunction(text)} with context", function(){
@@ -44,16 +55,22 @@ describe("ExpressionResolver.resolve", function() {
 			};
 		let expression = "${testFunction(text)}";
 		let resolver = ExpressionResolver.DEFAULT;
-		let result = resolver.resolve(expression, context);
-		expect(result).toBe(context.text);
-		expect(typeof result).toBe("string");
+		resolver.promise(expression, context).then(function(result){
+			expect(result).toBe(context.text);
+			return result;
+		}).then(function(result){
+			expect(typeof result).toBe("string");
+		});
 	});
 	
 	it("resolve ${undefined} default true", function(){
 		let expression = "${undefined}";
 		let resolver = ExpressionResolver.DEFAULT;
-		let result = resolver.resolve(expression, {}, true);
-		expect(result).toBe(true);
-		expect(typeof result).toBe("boolean");
+		resolver.promise(expression, {}, true).then(function(result){
+			expect(result).toBe(true);
+			return result;
+		}).then(function(result){
+			expect(typeof result).toBe("boolean");
+		});
 	});
 });
