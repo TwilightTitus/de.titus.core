@@ -88,9 +88,10 @@ const EventBind = function(anElement, aContext) {
 const Observer = new MutationObserver(function(mutations) {
 	mutations.forEach(function(mutation) {
 		mutation.addedNodes.forEach(function(node) {
-			if (node.nodeType != Node.TEXT_NODE) {
-				if(node.is("[event-type]"))
-					EventBind(node);				
+			if (node.nodeType === Node.ELEMENT_NODE) {
+				if(node.is("[event-type]")) 
+					EventBind(node);
+				
 				EventBind(node.find("[event-type]"));
 			}
 		});

@@ -38,7 +38,7 @@ ExpressionResolver.prototype.text = function(aText, aContext, aDefault) {
 				text = matcher.replaceAll(result, text);
 		}catch(e){
 			if(console && console.log)
-				console.error(e);
+				console.log(e);
 			if (hasDefault)
 				text = matcher.replaceAll(aDefault, text);
 		}
@@ -47,7 +47,7 @@ ExpressionResolver.prototype.text = function(aText, aContext, aDefault) {
 };
 
 ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault, aTimeout) {
-	let action = (function(resolve, args){
+	let action = (function(args, resolve){ 
 		if(args.length === 2)
 			resolve(this.text(args[0], args[1]));
 		else
@@ -55,8 +55,10 @@ ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault, a
 	}).bind(this, arguments);
 	
 	if(aTimeout > 0)
-		return new Promise(function(){
-			setTimeout(action, aTimeout);
+		return new Promise(function(resolve){
+			setTimeout(function(){
+				action(resolve);
+			}, aTimeout);
 		});
 	
 	return new Promise(action);
