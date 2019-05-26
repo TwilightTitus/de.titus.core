@@ -1,4 +1,4 @@
-import "../node_modules/dom-api-extension";
+import "modules/dom-api-extension";
 import ObjectUtils from "./utils/ObjectUtils";
 import ExpressionResolver from "./ExpressionResolver";
 
@@ -31,7 +31,7 @@ const Executer = function(anEvent) {
 			action.apply(action, args);
 	}
 	else if (typeof data.delegation === 'string')
-		element.trigger(data.delegation, args);
+		element.trigger(data.delegation, anEvent, args);
 
 	return data.preventDefault;
 };

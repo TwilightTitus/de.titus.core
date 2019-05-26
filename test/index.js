@@ -1,3 +1,5 @@
+import "modules/dom-api-extension";
+
 //API
 import "../browser-index";
 
