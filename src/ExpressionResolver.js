@@ -17,7 +17,7 @@ ExpressionResolver.prototype.resolve = function(aExpression, aContext, aDefault)
 	return EvalUtils.eval(expression, aContext || {}, aDefault);
 };
 
-ExpressionResolver.prototype.promise = function(aExpression, aContext, aDefault, aTimeout) {
+ExpressionResolver.prototype.promise = function(aExpression, aContext, aDefault) {
 	let expression = aExpression.trim();
 	let matcher = this.regex.parse(expression);
 	if (matcher.next())
@@ -46,7 +46,7 @@ ExpressionResolver.prototype.text = function(aText, aContext, aDefault) {
 	return text;
 };
 
-ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault, aTimeout) {
+ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault) {
 	let action = (function(args, resolve){ 
 		if(args.length === 2)
 			resolve(this.text(args[0], args[1]));
@@ -54,14 +54,11 @@ ExpressionResolver.prototype.promiseText = function(aText, aContext, aDefault, a
 			resolve(this.text(args[0], args[1], args[2]));
 	}).bind(this, arguments);
 	
-	if(aTimeout > 0)
-		return new Promise(function(resolve){
-			setTimeout(function(){
-				action(resolve);
-			}, aTimeout);
+	return new Promise(function(resolve){
+		window.requestAnimationFrame(function(){
+			action(resolve);
 		});
-	
-	return new Promise(action);
+	});
 };
 
 

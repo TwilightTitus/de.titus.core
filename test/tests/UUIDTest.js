@@ -1,4 +1,4 @@
-import UUID from "../src/UUID";
+import UUID from "src/UUID";
 
 const buildRegex = function(spacer){
 	return new RegExp("^\\w{8,8}" + spacer + "\\w{4,4}" + spacer + "\\w{4,4}" + spacer + "\\w{4,4}" + spacer + "\\w{12,12}$");

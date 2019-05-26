@@ -1,4 +1,4 @@
-import ExpressionResolver from "../../src/ExpressionResolver";
+import ExpressionResolver from "src/ExpressionResolver";
 
 const resolver = ExpressionResolver.DEFAULT;
 describe("ExpressionResolver.promiseText", function() {

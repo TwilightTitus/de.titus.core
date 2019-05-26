@@ -1,4 +1,4 @@
-import ExpressionResolver from "../../src/ExpressionResolver";
+import ExpressionResolver from "src/ExpressionResolver";
 
 let resolver = ExpressionResolver.DEFAULT;
 describe("ExpressionResolver.resolve", function() {	

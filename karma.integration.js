@@ -6,7 +6,7 @@ process.env.CHROME_BIN = puppeteer.executablePath();
 module.exports = function(config) {
 	config.set(merge(common, {
 		logLevel : config.LOG_INFO,
-		browsers : [ 'ChromeHeadless' ],
+		browsers : [ "ChromeHeadless" ],
 		autoWatch : false,
 		singleRun : true,
 		concurrency : Infinity

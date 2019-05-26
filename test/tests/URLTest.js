@@ -1,8 +1,8 @@
-import URL from "../src/URL";
+import URL from "src/URL";
 
 const TESTURL = "https://url.test.com/test?prop1=value1&prop2=value2&prop2=value3#hash-marker";
 describe("url", function() {	
-	it("document", function(){		
+	it("fromString", function(){		
 		let url = URL.fromString(TESTURL);
 		
 		expect(url.protocol).toBe("https");

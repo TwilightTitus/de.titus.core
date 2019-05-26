@@ -14,19 +14,16 @@ const EvalUtils = {
 			throw e;
 		}	
 	},
-	promiseEval : function(aStatement, aContext, aDefault, aTimeout){
-		let action = function(resolve, reject){
-			let result = EvalUtils.eval(aStatement, aContext, aDefault);
-			if(result instanceof Error)
-				reject(result);
-			
-			resolve(result);
-		};
-		
-		if(aTimeout > 0)
-			return new Promise(function(){setTimeout(action,aTimeout);});
-		else
-			return new Promise(action);
+	promiseEval : function(aStatement, aContext, aDefault){
+		return new Promise(function(resolve, reject){
+			window.requestAnimationFrame(function(){
+				let result = EvalUtils.eval(aStatement, aContext, aDefault);
+				if(result instanceof Error)
+					reject(result);
+				
+				resolve(result);
+			});
+		});
 	}
 };
 

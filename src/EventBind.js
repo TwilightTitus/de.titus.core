@@ -107,7 +107,6 @@ Observer.observe(find("body").first(),  {
 });
 
 ready(function() {
-	console.log("init event binds with autorun");
 	EventBind(find("[event-autorun]"));
 });
 export default EventBind;

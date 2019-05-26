@@ -1,4 +1,5 @@
+//API
 import "../browser-index";
-import "./ExpressionResolverTests";
-import "./URLTest";
-import "./UUIDTest";
+
+//TESTS
+import "./tests";
