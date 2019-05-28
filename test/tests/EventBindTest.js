@@ -13,11 +13,26 @@ describe("EventBind", function() {
 			console.log("arguments", arguments);
 			
 			expect(event.delegatedEvent).toBeDefined();
+			expect(event.delegatedEvent.type).toBe("click");
 			
 			done();
 		});		
 		
 		find("#eventbind-test-1 button").first().trigger("click");
+	});
+	
+	
+	it("action", function(done){
+		let container = find("#eventbind-test-2").first();
+		window.test = {
+			action : function(event){
+				console.log("arguments", arguments);	
+				expect(event.type).toBe("click");
+				done();
+			}
+		}; 		
+		
+		find("#eventbind-test-2 button").first().trigger("click");
 	});
 	
 	afterAll(function(done){
